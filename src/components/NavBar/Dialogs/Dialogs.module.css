@@ -1,0 +1,26 @@
+/*Разбили на два грида поле Messages*/
+.dialogs {
+    display: grid;                  
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogItems {
+    padding: 10px;
+}
+
+.dialogItems .active { /*Если в классе dialogItems сидит класс active,
+                        то элемент будет оливковым*/
+    color: olive;
+}
+
+.dialog {
+    color: red;
+}
+
+.messages {
+    padding: 10px;
+}
+
+.message {
+    color: yellowgreen;
+}
