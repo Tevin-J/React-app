@@ -2,18 +2,32 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
+let myPostsData = [
+  {id:0, postText:"Сегодня классная погода! Но где-то не здесь.", likesCount:10},
+  {id:1, postText:"Хочу в горы!", likesCount:15},
+  {id:2, postText:"Ищу работу...", likesCount:20},
+];
+
 const MyPosts = () => {
-  return <div>
+  return <div className={s.MyPostsBlock}>
+    <h3>
     My posts
+    </h3>
     <div>
-      <textarea></textarea>
-      <button>Add post</button>
+      <div>
+        <textarea></textarea>
+      </div>
+      <div>
+        <button>Add post</button>
+      </div>
+      <div>
       <button>Remove</button>
+      </div>
     </div>
     <div className={s.posts}>
-      <Post message='Сегодня классная погода! Но где-то не здесь.' likesCount='15' />
-      <Post message='Хочу в горы!' likesCount='10'/>
-      <Post message='Ищу работу...' likesCount='20'/>
+      <Post message={myPostsData[0].postText} likesCount={myPostsData[0].likesCount} />
+      <Post message={myPostsData[1].postText} likesCount={myPostsData[1].likesCount} />
+      <Post message={myPostsData[2].postText} likesCount={myPostsData[2].likesCount} />
     </div>
   </div>
 }
