@@ -5,12 +5,15 @@
 }
 
 .dialogItems {
-    padding: 10px;
+    padding: 20px;
+    text-decoration: none;
+    color: rgb(253, 10, 10);
 }
 
 .dialogItems .active { /*Если в классе dialogItems сидит класс active,
                         то элемент будет оливковым*/
     color: olive;
+
 }
 
 .dialog {
@@ -19,8 +22,6 @@
 
 .messages {
     padding: 10px;
-}
-
-.message {
-    color: yellowgreen;
+    color: black;
+    
 }

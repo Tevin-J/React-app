@@ -1,46 +1,29 @@
 import React from 'react';
-import s from "./Dialogs.module.css"
-import {NavLink} from "react-router-dom";
+import s from "./Dialogs.module.css";
+import Message from "./Message/Message";
+import DialogItem from "./DialogItem/DialogItem"
 
-
-const DialogItem = (props) => {
-    let path = "/dialogs/" + props.id;
-    return (
-        <div className={s.dialog}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
-}
-
-const Message = (props) => {
-    return (
-    <div className={s.message}>
-       {props.textMessage}
-    </div>
-    )
-} 
-
-let dialogsData = [
-    {id:1, name: "Sam"},
-    {id:2, name: "Hren"}
-];
-
-let messagesData = [
-    {id:1, message: "А не пойти ли ка тебе?!"},
-    {id:2, message: "пРиФфЕт кАк ДеЛиФфКи"},
-];
 
 const Dialogs = (props) => {
+    
+    
+    let dialogsElements = props.state.dialogs 
+        .map ( d => <DialogItem name={d.name} id={d.id}/> );    /*Вместо того, чтоб создавать массив, в котором нужно перечислять 
+        отдельно каждый элемент который отобразит, что нужно сделать конкретно с каждым элементом, используем метод массива map.
+        Этот метод автоматически переберет каждый элемент массива и сделает то, что нам необходимо с исходным массивом данных.
+        В данном случае, метод map помогает автоматически перебрать все элементы массива dialogs и по очереди каждый элемент 
+        отрисует там, где мы захотим этот массив отобразить*/
+    
+    let messagesElements = props.state.messages
+        .map ( m =>  <Message textMessage={m.message}/>);
+    
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
-                <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
-                <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
+                {dialogsElements}
             </div>    
             <div className={s.messages}>
-                <Message textMessage={messagesData[0].message}/>
-                <Message textMessage={messagesData[1].message}/>
-                
+                {messagesElements}               
             </div>
         </div>
         
