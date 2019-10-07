@@ -5,7 +5,7 @@
 }
 
 .dialogItems {
-    padding: 20px;
+    padding: 10px;
     text-decoration: none;
     color: rgb(253, 10, 10);
 }
@@ -23,5 +23,12 @@
 .messages {
     padding: 10px;
     color: black;
-    
+}
+
+.textarea {
+    margin-left: 10px;
+}
+
+.button {
+    margin-left: 10px;
 }
