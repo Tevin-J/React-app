@@ -1,0 +1,27 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr; /*2 грида: под имя диалога и сообщения*/
+}
+
+.dialogsItem {
+    padding: 10px;
+}
+
+.dialog {
+}
+
+.dialog a {
+    text-decoration: none;
+    color: white;
+}
+
+.dialog a.activeLink {
+    color: black;
+}
+
+.messagesItem {
+    padding: 10px;
+}
+
+.message {
+}

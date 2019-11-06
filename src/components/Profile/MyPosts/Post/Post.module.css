@@ -1,8 +1,13 @@
-
-.item {
-  color: #ffd28a;
+.post {
+    color: aquamarine;
 }
 
-.item img {
-  width: 80px;
+.post img {
+    width: 40px;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.post span {
+    margin-left: 60px;
 }

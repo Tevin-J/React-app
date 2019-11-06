@@ -1,0 +1,14 @@
+.nav {
+    grid-area: nav;
+    background-color: tan;
+}
+
+.item a {
+    color: white;
+    text-decoration: none; /*Убрали подчеркивание использованных ссылок*/
+    margin: 10px;
+}
+
+.item a.activeLink {
+    color: black;
+}

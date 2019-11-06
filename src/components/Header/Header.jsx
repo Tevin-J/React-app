@@ -1,16 +1,15 @@
 import React from 'react';
-import s from './Header.module.css'; /*Импортируем css файл в jsx файл компоненты
-Компонента делится на jsx и css для удобства работы, чтоб не было путаницы*/
-/*Create react app устроен так, что использует модульность,
-поэтому в названии связанного с jsx файлом css модуля
-должно быть указано .module.css*/
-const Header = () => { /*Создаем компоненту Header, которая будет возвращать логотип. 
-  имя компоненты ОБЯЗАТЕЛЬНО с большой буквы! Имя класса нельзя писать просто class,
-  так как такое имя зарезервировано.*/
-  return <header className={s.header}> 
-    <img src='https://cdn.pixabay.com/photo/2018/04/04/12/28/elephant-3289662_960_720.png' />
-  </header >
+import style from "./Header.module.css";
+import {NavLink} from "react-router-dom";
+
+const Header = (props) => {
+    return (
+    <header className = {style.header}>
+        <NavLink to='/feed'>
+            <img src = "https://png.pngtree.com/element_our/sm/20180524/sm_5b072f1c21cb2.png"/>
+        </NavLink>
+    </header>
+    );
 }
 
-export default Header; /*Обязательно экспортировать компоненту,чтоб потом можно было ее 
-где-нибудь импортировать*/
+export default Header;

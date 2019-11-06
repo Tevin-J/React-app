@@ -1,42 +1,26 @@
 import React from 'react';
-import s from './MyPosts.module.css';
-import Post from './Post/Post';
-
-let newMessageElement = React.createRef ();
-let addPost = () => {
-  let text = newMessageElement.current.value;
-  alert(text)
-};
+import style from "./MyPosts.module.css";
+import Post from "./Post/Post";
 
 
-const MyPosts = (props) => {
-  
-
-
-  let postsElement = props.posts
-  .map ( p => <Post message={p.postText} likesCount={p.likesCount} />);
-
- 
-  
-  return <div className={s.MyPostsBlock}>
-    <h3>
-    My posts
-    </h3>
-    <div>
-      <div>
-        <textarea ref={newMessageElement}></textarea>
-      </div>
-      <div>
-        <button onClick = {addPost}>Add post</button>
-      </div>
-      <div>
-      <button>Remove</button>
-      </div>
-    </div>
-    <div className={s.posts}>
-      {postsElement}
-    </div>
-  </div>
+const MyPosts = () => {
+    let messageData = [
+        {id:'1', message:'Privet!', likesCount: 15},
+        {id:'2', message: 'Kak dela?', likesCount: 12}
+    ];
+    return (
+        <div className={style.myPosts}>
+            <h3>My posts</h3>
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
+            <Post message={messageData[0].message} likesCount={messageData[0].likesCount}/>
+            <Post message={messageData[1].message} likesCount={messageData[1].likesCount}/>
+        </div>
+    );
 }
 
 export default MyPosts;
