@@ -3,7 +3,7 @@
     grid-template-columns: 2fr 10fr; /*2 грида: под имя диалога и сообщения*/
 }
 
-.dialogsItem {
+.dialogsItems {
     padding: 10px;
 }
 
@@ -12,11 +12,12 @@
 
 .dialog a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .dialog a.activeLink {
     color: black;
+    text-shadow: 1px 1px 9px black;
 }
 
 .messagesItem {

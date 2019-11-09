@@ -2,17 +2,17 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/NavBar/Navbar";
-import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
-import Feed from "./components/Feed/Feed";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
+import Profile from "./components/Content/Profile/Profile";
+import Dialogs from "./components/Content/Dialogs/Dialogs";
+import {HashRouter, Route} from "react-router-dom";
+import Feed from "./components/Content/Feed/Feed";
+import Music from "./components/Content/Music/Music";
+import Settings from "./components/Content/Settings/Settings";
 
 
 const App = () => {
     return (
-        <BrowserRouter> {/*необходим чтоб работал тэг route*/}
+        <HashRouter basename={process.env.PUBLIC_URL}> {/*необходим чтоб работал тэг route*/}
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
@@ -26,7 +26,7 @@ const App = () => {
                     <Route path='/settings' component={Settings}/>
                 </div>
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 

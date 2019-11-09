@@ -4,12 +4,14 @@
     display: grid;
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
-    grid-template-areas: "header header" "nav content";
+    grid-template-areas:
+            "header header"
+            "nav content";
 }
 
 .app-wrapper-content {
     grid-area: content;
-    background-color: indianred;
+    background-color: #fce3c2;
 }
 
 .app-wrapper-content img {

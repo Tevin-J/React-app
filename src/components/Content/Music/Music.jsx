@@ -4,7 +4,7 @@ import style from './Music.module.css';
 const Music = () => {
     return (
         <div>
-            Your playlist
+            My playlist
         </div>
     );
 }
