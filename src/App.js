@@ -10,7 +10,8 @@ import Music from "./components/Content/Music/Music";
 import Settings from "./components/Content/Settings/Settings";
 
 
-const App = () => {
+const App = (props) => {
+
     return (
         <HashRouter basename={process.env.PUBLIC_URL}> {/*необходим чтоб работал тэг route*/}
             <div className="app-wrapper">
@@ -18,12 +19,12 @@ const App = () => {
                 <Navbar/>
                 <div className="app-wrapper-content"> {/*создали данный класс, так как он общий для всего контента, и
                 вынесли его на более высокий уровень, чтоб не прописывать в css-модуле каждой компоненты контента отдельно*/}
-                    <Route path='/dialogs' component={Dialogs}/> {/*работа тэга route: когда встечает заданный путь,
-                    отрисовывает заданную компоненту*/}
-                    <Route path='/profile' component={Profile}/>
-                    <Route path='/feed' component={Feed}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/settings' component={Settings}/>
+                    <Route path='/dialogs' render = { () => <Dialogs dialogsData={props.dialogsData} messageData={props.messageData}/> }/> {/*работа тэга route: когда встечает заданный путь,
+                    отрисовывает заданную компоненту. вместо метода component используем render, чтоб передать в компоненты пропсы*/}
+                    <Route path='/profile' render = { () => <Profile postData={props.postData}/>}/>
+                    <Route path='/feed' render = { () => <Feed/>}/>
+                    <Route path='/music' render = { () => <Music/>}/>
+                    <Route path='/settings' render = { () => <Settings/>}/>
                 </div>
             </div>
         </HashRouter>
