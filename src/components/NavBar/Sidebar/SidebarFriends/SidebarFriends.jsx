@@ -14,7 +14,7 @@ const SidebarFriends = (props) => {
             <div className={style.sidebar}>
                 <div className={style.sidebarFriends}>
                     <div className={style.title}>
-                        My Friends
+                        My friends
                     </div>
                     {sidebarFriendsAvatars}
                     {sidebarFriendsNames}

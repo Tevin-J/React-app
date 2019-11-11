@@ -1,13 +1,15 @@
 import React from 'react';
 import style from './ProfileInfo.module.css';
+import {NavLink} from "react-router-dom";
 
 const ProfileInfo = (props) => {
     return (
         <div>
             <div>
-                <img src = "https://destinationreporterindia.com/wp-content/uploads/2019/09/International-Chiang-Mai-Colorful-hot-air-balloons-flying-over-mountain-at-Dot-Inthanon-in-Chiang-Mai.jpg"/>
+                <img src = "https://wallpaperaccess.com/full/900944.jpg"/>
                 <div className={style.profileInfo}>
-                ava + description
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Kj6cPQDCYYnGSFWl729oSTFLzKA2WWQII5Mzj_eYAwB88T_E&s" alt="profileAvatar"/>
+                    Anton Revta
                 </div>
             </div>
         </div>

@@ -1,3 +1,8 @@
 .profileInfo {
+    padding: 10px;
+}
 
+.profileInfo img {
+    width: 80px;
+    border-radius: 80px;
 }

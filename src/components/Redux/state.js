@@ -2,8 +2,8 @@ import React from 'react';
 let state = {
     profilePage: {
         postData: [
-            {id: '1', message: 'Privet!', likesCount: 15},
-            {id: '2', message: 'Kak dela?', likesCount: 12}
+            {id: '1', message: 'Терперье и труд все перетрут.', likesCount: 15},
+            {id: '2', message: 'Продам гараж. Пишите в лс.', likesCount: 12}
         ]
     },
     dialogsPage: {

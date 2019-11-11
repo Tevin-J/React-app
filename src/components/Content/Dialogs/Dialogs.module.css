@@ -44,3 +44,16 @@
 .messageFrom1 {
     text-align: left;
 }
+
+.sendBlock {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sendBlock textarea {
+    width: 300px;
+    height: 100px;
+}
