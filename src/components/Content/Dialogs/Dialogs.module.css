@@ -15,6 +15,11 @@
     color: black;
 }
 
+.dialog img {
+    width: 50px;
+    border-radius: 50px;
+}
+
 .dialog a.activeLink {
     color: black;
     text-shadow: 1px 1px 9px black;
@@ -25,4 +30,17 @@
 }
 
 .message {
+
+}
+
+.message img {
+    width: 20px;
+}
+
+.messageFrom0 {
+    text-align: right;
+}
+
+.messageFrom1 {
+    text-align: left;
 }

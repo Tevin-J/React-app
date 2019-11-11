@@ -1,0 +1,24 @@
+.title {
+    grid-area: title;
+    margin-left: 10px;
+}
+
+
+.sidebarFriends {
+    margin-top: 100px;
+    padding: 10px;
+    display: grid;
+    grid-template-rows: 20px 40px 30px;
+    grid-template-columns: 60px 60px 60px;
+    grid-template-areas:
+            "title title title"
+            "ava ava ava"
+            "name name name";
+}
+
+
+.sidebarFriends img {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}

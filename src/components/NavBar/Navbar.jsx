@@ -2,8 +2,10 @@ import React from 'react';
 import style from "./Navbar.module.css"; /*модули css позволяют использовать в названии классов самые простые названия,
 реакт сам преобразует имена классов в уникальные*/
 import {NavLink} from "react-router-dom";
+import SidebarFriends from "./Sidebar/SidebarFriends/SidebarFriends";
 
-const Navbar = () => {
+const Navbar = (props) => {
+
     return (
         <nav className={style.nav}>
             <div className={style.item}> {/*класс с основным атрибутом item по умолчанию сразу попадет в объект*/}
@@ -25,6 +27,7 @@ const Navbar = () => {
             <div className={style.item}>
                 <NavLink to="/settings" activeClassName={style.activeLink}>Settings</NavLink>
             </div>
+            <SidebarFriends friends={props.state.friends}/>
         </nav>
     );
 }
