@@ -1,9 +1,10 @@
 import React from 'react';
+import {rerenderEntireTree} from "../../render";
 let state = {
     profilePage: {
         postData: [
-            {id: '1', message: 'Терперье и труд все перетрут.', likesCount: 15},
-            {id: '2', message: 'Продам гараж. Пишите в лс.', likesCount: 12}
+            {id: 1, message: 'Терперье и труд все перетрут.', likesCount: 15},
+            {id: 2, message: 'Продам гараж. Пишите в лс.', likesCount: 12}
         ]
     },
     dialogsPage: {
@@ -62,5 +63,19 @@ let state = {
         ]
     }
 };
-export default state;
 
+export let addPost = (postMessage) => { /*эта ф-я addPost записывает данные в объект
+postData, она не та addPost, которая в MyPosts. передаем ее через props в MyPosts*/
+    let newPost = {
+        id: 3,
+        message: postMessage, /*сюда приходит значение, которое попало при вызове
+        ф-и addPost в MyPosts.jsx*/
+        likesCount: 0
+    };
+    state.profilePage.postData.push(newPost);
+    rerenderEntireTree(state); /*передаем state через пропсы в render.js.
+    если бы мы ее здесь не вызвали и не передали в renderjs то изменения в
+    state не фиксировались и страница не перерисовывалась*/
+}
+
+export default state;

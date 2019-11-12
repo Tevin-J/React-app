@@ -1,13 +1,44 @@
 .post {
     color: #050404;
+    display: grid;
+    grid-template-columns: 30px 350px;
+    grid-template-rows: 30px 20px;
+    grid-template-areas:
+    "avatar postText"
+    "avatar like";
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .post img {
-    width: 40px;
+    width: 45px;
     border-radius: 30px;
-    margin: 10px;
+    margin-top: 10px;
 }
 
-.post span {
-    margin-left: 60px;
+.avatar {
+    grid-area: avatar;
+    margin-top: 5px;
+}
+
+.postText {
+    grid-area: postText;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.like {
+    grid-area: like;
+    margin-left: 20px;
+}
+
+/*.like {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+}*/
+
+.like img {
+    width: 20px;
 }

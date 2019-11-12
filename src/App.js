@@ -22,7 +22,7 @@ const App = (props) => {
                 вынесли его на более высокий уровень, чтоб не прописывать в css-модуле каждой компоненты контента отдельно*/}
                     <Route path='/dialogs' render = { () => <Dialogs state={props.state.dialogsPage}/> }/> {/*работа тэга route: когда встечает заданный путь,
                     отрисовывает заданную компоненту. вместо метода component используем render, чтоб передать в компоненты пропсы*/}
-                    <Route path='/profile' render = { () => <Profile state={props.state.profilePage}/>}/>
+                    <Route path='/profile' render = { () => <Profile state={props.state.profilePage} addPost={props.addPost}/>}/>
                     <Route path='/feed' render = { () => <Feed/>}/>
                     <Route path='/music' render = { () => <Music/>}/>
                     <Route path='/settings' render = { () => <Settings/>}/>
