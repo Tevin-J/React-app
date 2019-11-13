@@ -5,7 +5,7 @@ import state from "./components/Redux/state";
 /*импортирует state из state.js, вызывает ф-ю render в render.js и передает ей state*/
 
 rerenderEntireTree(state); /*вызов ф-и отсюда загружает страницу в первый раз и в последующие
-перебрасывает в ф-ю в renderjs данные*/
+перебрасывает в ф-ю в render.js данные из state.js*/
 
 
 

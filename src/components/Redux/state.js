@@ -5,7 +5,8 @@ let state = {
         postData: [
             {id: 1, message: 'Терперье и труд все перетрут.', likesCount: 15},
             {id: 2, message: 'Продам гараж. Пишите в лс.', likesCount: 12}
-        ]
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogsData: [
@@ -64,18 +65,25 @@ let state = {
     }
 };
 
-export let addPost = (postMessage) => { /*эта ф-я addPost записывает данные в объект
-postData, она не та addPost, которая в MyPosts. передаем ее через props в MyPosts*/
+export let addPost = () => { /*эта ф-я addPost записывает данные в объект
+postData, она не та addPost, которая в MyPosts. передаем ее через props в MyPosts.
+и тот addPost который локальный, выполняет этот addPost глобальный*/
     let newPost = {
         id: 3,
-        message: postMessage, /*сюда приходит значение, которое попало при вызове
-        ф-и addPost в MyPosts.jsx*/
+        message: state.profilePage.newPostText, /*сюда приходит значение, которое попало при вызове
+        ф-и addPost в MyPosts.jsx. оно записалось в stata.profilePage.newPostText, его мы и взяли*/
         likesCount: 0
     };
     state.profilePage.postData.push(newPost);
+    state.profilePage.newPostText = '';
     rerenderEntireTree(state); /*передаем state через пропсы в render.js.
     если бы мы ее здесь не вызвали и не передали в renderjs то изменения в
     state не фиксировались и страница не перерисовывалась*/
+}
+
+export let updateNewPostText = (newPostText) => {
+    state.profilePage.newPostText = newPostText;
+    rerenderEntireTree(state);
 }
 
 export default state;
