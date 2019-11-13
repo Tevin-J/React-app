@@ -20,7 +20,7 @@ const App = (props) => {
                 <Navbar state={props.state.sidebar}/>
                 <div className="app-wrapper-content"> {/*создали данный класс, так как он общий для всего контента, и
                 вынесли его на более высокий уровень, чтоб не прописывать в css-модуле каждой компоненты контента отдельно*/}
-                    <Route path='/dialogs' render = { () => <Dialogs state={props.state.dialogsPage}/> }/> {/*работа тэга route: когда встечает заданный путь,
+                    <Route path='/dialogs' render = { () => <Dialogs state={props.state.dialogsPage} addMessage={props.addMessage} updateNewMessageText={props.updateNewMessageText} newMessageText={props.newMessageText}/> }/> {/*работа тэга route: когда встечает заданный путь,
                     отрисовывает заданную компоненту. вместо метода component используем render, чтоб передать в компоненты пропсы*/}
                     <Route path='/profile' render = { () => <Profile state={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
                     <Route path='/feed' render = { () => <Feed/>}/>
