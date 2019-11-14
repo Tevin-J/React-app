@@ -1,6 +1,8 @@
 import React from 'react';
 import style from './SidebarFriends.module.css';
 import Friend from "./Friend/Friend";
+import PropTypes from "prop-types";
+import Profile from "../../../Content/Profile/Profile";
 
 
 const SidebarFriends = (props) => {
@@ -25,3 +27,7 @@ const SidebarFriends = (props) => {
 };
 
 export default SidebarFriends;
+
+Profile.propTypes = {
+    friends: PropTypes.array,
+}

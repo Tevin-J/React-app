@@ -1,6 +1,7 @@
 import React from 'react';
 import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import PropTypes from 'prop-types';
 
 
 const MyPosts = (props) => {
@@ -31,3 +32,8 @@ const MyPosts = (props) => {
 }
 
 export default MyPosts;
+
+MyPosts.propTypes = {
+    postData: PropTypes.array,
+    newPostText: PropTypes.string
+}

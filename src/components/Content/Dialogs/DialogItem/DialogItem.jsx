@@ -1,6 +1,8 @@
 import React from 'react';
 import style from './../Dialogs.module.css'
 import {NavLink} from "react-router-dom";
+import PropTypes from 'prop-types';
+
 
 const DialogItem = (props) => {
     return (
@@ -13,3 +15,9 @@ const DialogItem = (props) => {
 
 
 export default DialogItem;
+
+DialogItem.propTypes = {
+    id: PropTypes.number,
+    avatar: PropTypes.object,
+    name: PropTypes.string
+}

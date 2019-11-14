@@ -1,5 +1,7 @@
 import React from 'react';
-import style from './../Dialogs.module.css'
+import style from './../Dialogs.module.css';
+import PropTypes from 'prop-types';
+import DialogItem from "../DialogItem/DialogItem";
 
 const Message = (props) => {
 
@@ -18,3 +20,8 @@ const Message = (props) => {
 };
 
 export default Message;
+
+Message.propTypes = {
+    from: PropTypes.number,
+    message: PropTypes.string
+}

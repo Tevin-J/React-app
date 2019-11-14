@@ -1,5 +1,7 @@
 import React from 'react';
 import style from './Friend.module.css';
+import PropTypes from "prop-types";
+
 
 const Friend = (props) => {
 
@@ -16,3 +18,8 @@ const Friend = (props) => {
 }
 
 export default Friend;
+
+Friend.propTypes = {
+    name: PropTypes.string,
+    avatar: PropTypes.object
+}

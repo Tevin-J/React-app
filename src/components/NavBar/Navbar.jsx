@@ -4,6 +4,7 @@ import style from "./Navbar.module.css"; /*модули css позволяют �
 import {NavLink} from "react-router-dom";
 import SidebarFriends from "./Sidebar/SidebarFriends/SidebarFriends";
 
+
 const Navbar = (props) => {
 
     return (
@@ -32,4 +33,5 @@ const Navbar = (props) => {
     );
 }
 
-export default Navbar; //чтоб в другом файле импортировать компоненту, мы должны ее экспортировать
+export default Navbar;
+

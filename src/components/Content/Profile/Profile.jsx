@@ -2,6 +2,7 @@ import React from 'react';
 import style from "./Profile.module.css";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import PropTypes from 'prop-types';
 
 const Profile = (props) => {
 
@@ -14,3 +15,8 @@ const Profile = (props) => {
 }
 
 export default Profile;
+
+Profile.propTypes = {
+    postData: PropTypes.array,
+    newPostText: PropTypes.string
+}

@@ -8,7 +8,7 @@ import {HashRouter, Route} from "react-router-dom";
 import Feed from "./components/Content/Feed/Feed";
 import Music from "./components/Content/Music/Music";
 import Settings from "./components/Content/Settings/Settings";
-
+import PropTypes from 'prop-types';
 
 
 const App = (props) => {
@@ -33,3 +33,7 @@ const App = (props) => {
 }
 
 export default App;
+
+App.propTypes = {
+    state: PropTypes.object
+}
