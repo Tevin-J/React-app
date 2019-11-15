@@ -2,12 +2,12 @@ import React from 'react';
 import style from './SidebarFriends.module.css';
 import Friend from "./Friend/Friend";
 import PropTypes from "prop-types";
-import Profile from "../../../Content/Profile/Profile";
+
 
 
 const SidebarFriends = (props) => {
 
-    let sidebarFriendsAvatars = props.friends.map(friend => <Friend avatar={friend.avatar}/>);
+    let sidebarFriendsAvatars = props.friends.map(friend => <Friend avatar={<img src={friend.avatar}/>}/>);
     let sidebarFriendsNames =props.friends.map(friend => <Friend name={friend.name}/>)
 
     return (
@@ -28,6 +28,8 @@ const SidebarFriends = (props) => {
 
 export default SidebarFriends;
 
-Profile.propTypes = {
+SidebarFriends.propTypes = {
     friends: PropTypes.array,
+    avatar: PropTypes.string,
+    name: PropTypes.string
 }
