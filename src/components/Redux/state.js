@@ -52,53 +52,49 @@ let store = {
             ]
         }
     },
-    getState () {
-        return this._state;
-    },
     _callSubscriber () { /*заглушка, которая потом попадает в другие ф-и state.js. необходимо было ее здесь
 создать, потому что ее нельзя импортировать из index.js, чтоб не было циклической зависимости*/
         console.log('state was changed');
     },
-    addPost () { /*описание работы функций addPost и updateNewPost --- в MyPosts присваиваем значение в
-textarea newPostText из state, на каждое изменение текста при помощи onPostChange мы вызываем функцию updateNewPostText,
-в которую в качестве параметра входит newPostElement.current.value, эти данные записываются в newPostText.
-Так побуквенно данные из UI попадают в state. Когда мы нажимаем кнопку Add Post вызывается локальная функция addPost,
-которая в свою очередь вызывает глобальную функцию addPost из state.js, которая вносит новый объект с newPostText
-значением ключа message в state.ProfilePage.PostData, и затем затирает newPostText, который также следом затирается в UI*/
-        let newPost = {
-            id: 3,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        this._state.profilePage.postData.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
+
+    getState () {
+        return this._state;
     },
-    updateNewPostText (newPostText) {
-        this._state.profilePage.newPostText = newPostText;
-        this._callSubscriber(this._state);
-    },
-    addMessage () {
-        let newMessage = {
-            id: 4,
-            message: this._state.dialogsPage.newMessageText,
-            from: 0
-        };
-        this._state.dialogsPage.messagesData.push(newMessage);
-        this._state.dialogsPage.newMessageText = '';
-        this._callSubscriber(this._state);
-    },
-    updateNewMessageText (newMessageText) {
-        this._state.dialogsPage.newMessageText = newMessageText;
-        this._callSubscriber(this._state);
-    },
-    subscribe (observer) { /*нам в state.js нужна rerenderEntireTree для того чтоб перерисовывать дерево
+    subscribe (observer) { /*нам в state.js нужна subscribe для того чтоб перерисовывать дерево
 каждый раз, когда произойдут какие-то изменения в state. Однако rerenderEntireTree у нас задана в index.js, а
 импортировать ее сюда мы не можем, так как будет циклическая зависимость. Тогда мы передаем rerenderEntireTree сюда
-через пропсы. Мы создаем свою фальш-rerenderEntireTree, просто чтоб потом на нее сослаться. создаем ф-ю subscribe с
-параметром observer, и нашей фальш-rerenderEntireTree присваиваем пропс ф-ю observer. в index.js мы вызываем ф-ю
+через пропсы. Мы создаем свою subscribe, просто чтоб потом на нее сослаться. создаем ф-ю subscribe с
+параметром observer, и нашей subscribe присваиваем пропс ф-ю observer. в index.js мы вызываем ф-ю
 subscribe и в качестве аргумента observer вписываем нужную нам ф-ю rerenderEntireTree.*/
         this._callSubscriber = observer;
+    },
+
+    dispatch(action) { //{type: 'ADD-POST'}
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 3,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.profilePage.postData.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newPostText;
+            this._callSubscriber(this._state);
+        } else if (action.type === 'ADD-MESSAGE') {
+            let newMessage = {
+                id: 4,
+                message: this._state.dialogsPage.newMessageText,
+                from: 0
+            };
+            this._state.dialogsPage.messagesData.push(newMessage);
+            this._state.dialogsPage.newMessageText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessageText = action.newMessageText;
+            this._callSubscriber(this._state);
+        }
     }
 }
 
