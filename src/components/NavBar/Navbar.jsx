@@ -3,6 +3,7 @@ import style from "./Navbar.module.css"; /*модули css позволяют �
 реакт сам преобразует имена классов в уникальные*/
 import {NavLink} from "react-router-dom";
 import SidebarFriends from "./Sidebar/SidebarFriends/SidebarFriends";
+import SidebarFriendsContainer from "./Sidebar/SidebarFriends/SidebarFriendsContainer";
 
 
 const Navbar = (props) => {
@@ -28,7 +29,7 @@ const Navbar = (props) => {
             <div className={style.item}>
                 <NavLink to="/settings" activeClassName={style.activeLink}>Settings</NavLink>
             </div>
-            <SidebarFriends friends={props.state.friends}/>
+            <SidebarFriendsContainer/>
         </nav>
     );
 }

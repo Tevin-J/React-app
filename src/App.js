@@ -18,12 +18,12 @@ const App = (props) => {
         <HashRouter basename={process.env.PUBLIC_URL}> {/*необходим чтоб работал тэг route*/}
             <div className="app-wrapper">
                 <Header/>
-                <Navbar state={props.state.sidebar}/>
+                <Navbar />
                 <div className="app-wrapper-content"> {/*создали данный класс, так как он общий для всего контента, и
                 вынесли его на более высокий уровень, чтоб не прописывать в css-модуле каждой компоненты контента отдельно*/}
-                    <Route path='/dialogs' render = { () => <DialogsContainer  store={props.store}/> }/> {/*работа тэга route: когда встечает заданный путь,
+                    <Route path='/dialogs' render = { () => <DialogsContainer /> }/> {/*работа тэга route: когда встечает заданный путь,
                     отрисовывает заданную компоненту. вместо метода component используем render, чтоб передать в компоненты пропсы*/}
-                    <Route path='/profile' render = { () => <Profile store={props.store}/>}/>
+                    <Route path='/profile' render = { () => <Profile />}/>
                     <Route path='/feed' render = { () => <Feed/>}/>
                     <Route path='/music' render = { () => <Music/>}/>
                     <Route path='/settings' render = { () => <Settings/>}/>

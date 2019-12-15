@@ -7,8 +7,10 @@ import PropTypes from "prop-types";
 
 const SidebarFriends = (props) => {
 
-    let sidebarFriendsAvatars = props.friends.map(friend => <Friend avatar={<img src={friend.avatar}/>}/>);
-    let sidebarFriendsNames =props.friends.map(friend => <Friend name={friend.name}/>)
+    let state = props.friends;
+
+    let sidebarFriendsAvatars = state.friends.map(friend => <Friend avatar={<img src={friend.avatar}/>}/>);
+    let sidebarFriendsNames = state.friends.map(friend => <Friend name={friend.name}/>)
 
     return (
 
