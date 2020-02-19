@@ -3,16 +3,18 @@ import {sendMessageActionCreator, updateNewMessageTextActionCreator} from "../..
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 
-
-let mapStateToProps = (state) => {
+//контейнерная компонента является родительской для своей презентационной и освобождает ее от знания store и его методов
+let mapStateToProps = (state) => { //mapStateToProps - ф-я которая создает объект, которые возвращают state.
+    // Этот state это аналог state=store.getState()
     return (
         {
-            dialogsPage: state.dialogsPage
+            dialogsPage: state.dialogsPage //св-во dialogsPage попадает в пропсы в компоненту Dialogs
         }
     )
 }
 
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = (dispatch) => { //mapDispatchToProps - ф-я которая создает объект, из которого в пропсы
+    // попадут коллбеки. эти коллбеки диспатчат что-то в store dispatch приходит как store.dispatch().bind(store)
     return (
         {
             sendMessage: () => {
@@ -24,8 +26,11 @@ let mapDispatchToProps = (dispatch) => {
         }
     )
 }
+//эти методы mapDispatchToProps mapStateToProps настраивают connect и объясняют по каким правилам мы законнектим Dialogs в store
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs) //с помощью метода connect библиотеки
+// react-redux создается контейнерная компонента, в которую через пропсы приходят mapStateToProps и mapDispatchToProps,
+// и она отрисует презентационную компоненту
 
 export default DialogsContainer;
 

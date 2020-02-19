@@ -33,7 +33,7 @@ const Dialogs = (props) => {
             </div>
             <div className={style.sendBlock}>
                 <div>
-                    <textarea onChange={onNewMessageChange} value={newMessageText}/>
+                    <textarea onChange={onNewMessageChange} value={newMessageText}/> //здесь организован FLUX-круговорот
                 </div>
                 <div>
                     <button onClick={onSendMessageClick}>Send</button>

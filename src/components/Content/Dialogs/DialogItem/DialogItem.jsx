@@ -8,7 +8,7 @@ const DialogItem = (props) => {
     return (
         <div className={style.dialog}>
             <NavLink to={'/dialogs/' + props.id} activeClassName={style.activeLink}>{props.avatar}{props.name}</NavLink> {/*с помощью
-            NavLink переключаемся по вкладкам без перезагрузки страницы*/}
+            NavLink переключаемся по вкладкам без перезагрузки страницы. меняет url а то что в свойстве 'to'*/}
         </div>
     )
 }

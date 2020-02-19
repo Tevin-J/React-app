@@ -1,4 +1,5 @@
-const SEND_MESSAGE = 'SEND-MESSAGE';
+const SEND_MESSAGE = 'SEND-MESSAGE'; //для удобства присвоили тип actiona переменной, чтоб обращаться уже с ней и не
+// допускать ошибок при написании типа как строки
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 let initialState = {
@@ -27,7 +28,8 @@ let initialState = {
         newMessageText: ''
 }
 
-const dialogsReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action) => {  //reducer получает свою ветку state (для первого отображения
+    // страницы нужно отобразить initial state) и action. если тип actionа есть в данном reducere, то он изменит state
     switch (action.type) {
         case SEND_MESSAGE:
             let text = state.newMessageText;
@@ -39,13 +41,16 @@ const dialogsReducer = (state = initialState, action) => {
         case UPDATE_NEW_MESSAGE_TEXT:
             return ({
                 ...state,
-                newMessageText: action.newMessageText
+                newMessageText: action.newMessageText //переписываем в стейте это свойство значением newMessageText
+                // экшена. у данного типа экшена это свойство приходит значением text из DialogsContainer,
+                // где и вызывается данный actionCreator
             })
         default:
             return state;
     }
 };
-export const sendMessageActionCreator = () => ({type: SEND_MESSAGE});
+export const sendMessageActionCreator = () => ({type: SEND_MESSAGE}); //actionCreatorы создают actionы. action это
+// объект у которого обязательно есть свойство type, а также другие св-ва по необходимости
 export const updateNewMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT,
     newMessageText: text});
 export default dialogsReducer;

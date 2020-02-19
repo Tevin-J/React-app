@@ -7,8 +7,10 @@ import App from './App';
 import {Provider} from "react-redux";
 
     ReactDOM.render(
-        <Provider store={store}>
-        <App/>
+        <Provider store={store}> {/*с помощью тега provider библиотеки react-redux создаем контекст и делаем store
+            доступным для всех компонент которые мы обернули этим тегом? тем самым не нужно передавать весь store через
+            пропсы вниз по дереву, а просто взять их из контекста в контейнерных компонентах*/}
+            <App/>
         </Provider>, document.getElementById('root')
     )
 
