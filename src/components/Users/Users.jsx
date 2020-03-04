@@ -1,16 +1,15 @@
 import React from 'react';
 import style from './Users.module.css'
+import * as axios from "axios";
+import userPhoto from '../../assets/images/user.png'
 
 let Users = (props) => {
-    if (props.users.length === 0) {
-        props.setUsers([
-            {id: 1, followed: false, photoUrl: 'https://png.pngtree.com/png-vector/20191101/ourlarge/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg',
-                fullname: 'Vasily', location: {city: 'Minsk', country: 'Belarus'}, status: 'I am Vasily'},
-            {id: 2, followed: true, photoUrl: 'https://png.pngtree.com/png-vector/20191101/ourlarge/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg',
-                fullname: 'Stepan', location: {city: 'Moscow', country: 'Russia'}, status: 'I am Stepan'},
-            {id: 3, followed: false, photoUrl: 'https://png.pngtree.com/png-vector/20191101/ourlarge/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg',
-                fullname: 'Timofey', location: {city: 'Kiev', country: 'Ukraine'}, status: 'I am Timofey'}
-        ])
+
+    if (props.users.length === 0) { /*если изначально длина массива юзеров равна нулю, то делаем get-запрос на сервер,
+    и затем вызываем коллбек который засетает юзеров, полученных с сервера*/
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            props.setUsers(response.data.items)
+        })
     }
 
     return (
@@ -19,24 +18,28 @@ let Users = (props) => {
                 props.users.map(user => <div key={user.id}>
                     <span>
                         <div className={style.userPhoto}>
-                            <img src={user.photoUrl}/>
+                            <img src={user.photos.small ? user.photos.small : userPhoto} className={style.userPhoto}/>
                         </div>
                         <div>
                             {user.followed
-                            ? <button onClick={() => {props.unfollow(user.id)}}>Unfollow</button>
-                            : <button onClick={() => {props.follow(user.id)}}>Follow</button>}
+                                ? <button onClick={() => {
+                                    props.unfollow(user.id)
+                                }}>Unfollow</button>
+                                : <button onClick={() => {
+                                    props.follow(user.id)
+                                }}>Follow</button>}
 
                         </div>
                     </span>
                         <span>
                         <span>
-                            <div>{user.fullname}</div>
+                            <div>{user.name}</div>
                             <div>{user.status}</div>
                         </span>
-                        <span>
+                        {/*<span>
                             <div>{user.location.country}</div>
                             <div>{user.location.city}</div>
-                        </span>
+                        </span>*/}
                     </span>
                     </div>
                 )
