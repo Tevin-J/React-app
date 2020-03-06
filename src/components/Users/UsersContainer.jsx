@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followActionCreator,
-    setCurrentPageActionCreator, setTotalUsersCountActionCreator,
-    setUsersActionCreator, toggleIsFetchingActionCreator,
-    unfollowActionCreator
+    follow,
+    setCurrentPage, setTotalUsersCount,
+    setUsers, toggleIsFetching,
+    unfollow
 } from "../Redux/usersReducer";
 import * as axios from "axios";
 import Users from "./Users";
@@ -80,28 +80,16 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching
     })
 }
-let mapDispatchToProps = (dispatch) => {
 
-    return {
-         follow: (userId) => {
-             dispatch(followActionCreator(userId))
-         },
-         unfollow: (userId) => {
-             dispatch(unfollowActionCreator(userId))
-         },
-        setUsers: (users) => {
-             dispatch(setUsersActionCreator(users))
-        },
-        setCurrentPage: (pageNumber) => {
-             dispatch(setCurrentPageActionCreator(pageNumber))
-        },
-        setTotalUsersCount: (totalUsersCount) => {
-             dispatch(setTotalUsersCountActionCreator(totalUsersCount))
-        },
-        toggleIsFetching: (isFetching) => {
-             dispatch(toggleIsFetchingActionCreator(isFetching))
-        }
-    }
-}
-export default connect (mapStateToProps, mapDispatchToProps)(UsersContainer) /*первая контейнерная компонента коннектит
+export default connect (mapStateToProps, {
+    /*Вместо того чтоб создавать mapDispatchToProps и там диспатчить
+    экшнкреэйторы, записали все экшнкреэйторы объектом сразу в коннект.
+    коннект сам задиспатчит их*/
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching
+})(UsersContainer) /*первая контейнерная компонента коннектит
 стор и отрисовывает вторую контейнерную компоненту*/
