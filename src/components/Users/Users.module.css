@@ -6,7 +6,6 @@
 .usersPages {
     cursor: pointer;
     padding: 5px;
-    width: 50px;
 }
 .selectedPage {
     margin-left: 5px;
