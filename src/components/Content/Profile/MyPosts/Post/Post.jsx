@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Post.module.css';
 import PropTypes from 'prop-types';
-import Profile from "../../Profile";
+import like from '../../../../../assets/images/like.svg'
 
 const Post = (props) => {
     return (
@@ -12,8 +12,8 @@ const Post = (props) => {
         <div className={style.postText}>
             {props.message}
         </div>
-        <div className={style.like}>
-            <img src="https://clipart.info/images/ccovers/1513313791facebook-circle-heart-love-png.png"/>
+        <div className={style.likeBlock}>
+            <img src={like}/>
             {props.likesCount}
         </div>
     </div>
