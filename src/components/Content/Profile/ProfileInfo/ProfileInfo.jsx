@@ -1,15 +1,33 @@
 import React from 'react';
 import style from './ProfileInfo.module.css';
-import {NavLink} from "react-router-dom";
+import Preloader from "../../../Common/Preloader/Preloader";
 
 const ProfileInfo = (props) => {
+    if (!props.profile) {
+        return (
+            <Preloader/>
+        )
+    }
     return (
         <div>
             <div>
                 <img src = "https://wallpaperaccess.com/full/900944.jpg"/>
                 <div className={style.profileInfo}>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Kj6cPQDCYYnGSFWl729oSTFLzKA2WWQII5Mzj_eYAwB88T_E&s" alt="profileAvatar"/>
-                    Anton Revta
+                    <img src={props.profile.photos.large}/>
+                    {props.profile.fullName}
+                    <div className={style.profileInfoBlock}>
+                        {props.profile.aboutMe}
+                    </div>
+                    <div>
+                        {props.profile.contacts.vk}
+                    </div>
+                    <div className={style.profileInfoBlock}>
+                        В поисках работы:
+                        <input type="checkbox" checked={props.profile.lookingForAJob}/>
+                        <div>
+                            {props.profile.lookingForAJobDescription}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
