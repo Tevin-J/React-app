@@ -7,6 +7,9 @@ const Header = (props) => {
     <header className = {style.header}>
         <NavLink to='/feed'>
             <img src = "https://png.pngtree.com/element_our/sm/20180524/sm_5b072f1c21cb2.png"/>
+            <div className={style.loginBlock}>
+                {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+            </div>
         </NavLink>
     </header>
     );
