@@ -8,7 +8,7 @@ class HeaderContainer extends React.Component {
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
             withCredentials: true /*данный параметр нужен чтоб указать что мы хотим зацепить авторизационный cookie
-            в запросе на сервер*/
+            в запросе на сервер. в get передается вторым, в post - третьим*/
         })
             .then(response => {
                if (response.data.resultCode === 0) {
