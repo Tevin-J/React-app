@@ -5,10 +5,11 @@ import {
     setCurrentPage, setTotalUsersCount,
     setUsers, toggleIsFetching,
     unfollow
-} from "../Redux/usersReducer";
-import * as axios from "axios";
+} from "../../Redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
+import {usersAPI} from "../../api/api";
+
 /*коннектом создаем первую контейнерную компоненту, в которой отрисовываем вторую контейнерную
 компоненту, которая отрисовывает презентационную компоненту Users*/
 class UsersContainer extends React.Component {
@@ -16,12 +17,9 @@ class UsersContainer extends React.Component {
         this.props.toggleIsFetching(true);
         if (this.props.users.length === 0) { /*если изначально длина массива юзеров равна нулю, то делаем get-запрос на сервер,
              и затем вызываем коллбек который засетает юзеров, полученных с сервера*/
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-                withCredentials: true
-            })
-                .then(response => {
+            usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
                     this.props.toggleIsFetching(false);
-                    this.props.setUsers(response.data.items);
+                    this.props.setUsers(data.items);
                     /*this.props.setTotalUsersCount(response.data.totalCount)*/
                     this.props.setTotalUsersCount(25)
                 })
@@ -30,24 +28,18 @@ class UsersContainer extends React.Component {
     onPageChanged = (pageNumber) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then(response => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
                 this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
     }
     onReducePagesList = () => {
         this.props.toggleIsFetching(true);
         let currentPage = this.props.currentPage-1;
         this.props.setCurrentPage(currentPage);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then(response => {
+        usersAPI.getUsers(currentPage, this.props.pageSize).then(data => {
                 this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
                 this.props.setTotalUsersCount(this.props.totalUsersCount-5)
             })
     }
@@ -55,12 +47,9 @@ class UsersContainer extends React.Component {
         this.props.toggleIsFetching(true);
         let currentPage = this.props.currentPage+1;
         this.props.setCurrentPage(currentPage);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then(response => {
+        usersAPI.getUsers(currentPage, this.props.pageSize).then(data => {
                 this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
                 this.props.setTotalUsersCount(this.props.totalUsersCount+5)
             })
     }

@@ -1,18 +1,15 @@
 import React from 'react';
 import Header from "./Header";
-import * as axios from "axios";
 import {connect} from "react-redux";
-import {setAuthUserData} from "../Redux/authReducer";
+import {setAuthUserData} from "../../Redux/authReducer";
+import {authAPI} from "../../api/api";
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true /*данный параметр нужен чтоб указать что мы хотим зацепить авторизационный cookie
-            в запросе на сервер. в get передается вторым, в post - третьим*/
-        })
-            .then(response => {
-               if (response.data.resultCode === 0) {
-                   let {id, email, login} = response.data.data
+        authAPI.authMe()
+            .then(data => {
+               if (data.resultCode === 0) {
+                   let {id, email, login} = data.data
                    this.props.setAuthUserData(id, email, login)
                }
             })
