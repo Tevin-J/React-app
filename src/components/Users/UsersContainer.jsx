@@ -2,56 +2,33 @@ import React from 'react';
 import {connect} from "react-redux";
 import {
     follow,
+    getUsers,
     setCurrentPage, setTotalUsersCount,
-    setUsers, toggleFollowingInProgress, toggleIsFetching,
-    unfollow
+    setUsers, toggleFollowingInProgress, toggleIsFetching, unfollow
 } from "../../Redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 /*коннектом создаем первую контейнерную компоненту, в которой отрисовываем вторую контейнерную
 компоненту, которая отрисовывает презентационную компоненту Users*/
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        if (this.props.users.length === 0) { /*если изначально длина массива юзеров равна нулю, то делаем get-запрос на сервер,
-             и затем вызываем коллбек который засетает юзеров, полученных с сервера*/
-            usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                    this.props.toggleIsFetching(false);
-                    this.props.setUsers(data.items);
-                    /*this.props.setTotalUsersCount(response.data.totalCount)*/
-                    this.props.setTotalUsersCount(25)
-                })
-        }
+        this.props.getUsers(/*this.props.users,*/ this.props.currentPage, this.props.pageSize)
+        /*вызываем thunk-creator из редьюсера, в котором объединена вся логика диспатчей и запросов на сервер, которые
+        должны выполняться вместе*/
     }
     onPageChanged = (pageNumber) => {
-        this.props.toggleIsFetching(true);
-        this.props.setCurrentPage(pageNumber);
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsers(/*this.props.users,*/ pageNumber, this.props.pageSize)
     }
     onReducePagesList = () => {
-        this.props.toggleIsFetching(true);
+
         let currentPage = this.props.currentPage-1;
-        this.props.setCurrentPage(currentPage);
-        usersAPI.getUsers(currentPage, this.props.pageSize).then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(this.props.totalUsersCount-5)
-            })
+        this.props.getUsers(/*this.props.users,*/ currentPage, this.props.pageSize)
     }
     onIncreasePagesList = () => {
-        this.props.toggleIsFetching(true);
+
         let currentPage = this.props.currentPage+1;
-        this.props.setCurrentPage(currentPage);
-        usersAPI.getUsers(currentPage, this.props.pageSize).then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(this.props.totalUsersCount+5)
-            })
+        this.props.getUsers(/*this.props.users,*/ currentPage, this.props.pageSize)
     }
     render() {
         return (
@@ -61,7 +38,8 @@ class UsersContainer extends React.Component {
                    currentPage={this.props.currentPage} onReducePagesList={this.onReducePagesList}
                    onPageChanged={this.onPageChanged} onIncreasePagesList={this.onIncreasePagesList}
                    users={this.props.users} unfollow={this.props.unfollow} follow={this.props.follow}
-                   toggleFollowingInProgress={this.props.toggleFollowingInProgress} followingInProgress={this.props.followingInProgress}/>
+                   toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+                       followingInProgress={this.props.followingInProgress}/>
             </>
         )
     }
@@ -82,14 +60,10 @@ let mapStateToProps = (state) => {
 
 export default connect (mapStateToProps, {
     /*Вместо того чтоб создавать mapDispatchToProps и там диспатчить
-    экшнкреэйторы, записали все экшнкреэйторы объектом сразу в коннект.
+    экшнкреэйторы и санк-креэйторы, записали все экшнкреэйторы объектом сразу в коннект.
     коннект сам задиспатчит их*/
-    follow,
-    unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    toggleIsFetching,
-    toggleFollowingInProgress
+    setUsers, setCurrentPage, setTotalUsersCount,
+    toggleIsFetching, toggleFollowingInProgress,
+    getUsers, follow, unfollow
 })(UsersContainer) /*первая контейнерная компонента коннектит
 стор и отрисовывает вторую контейнерную компоненту*/
