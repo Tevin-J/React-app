@@ -8,7 +8,8 @@ let mapStateToProps = (state) => { //mapStateToProps - ф-я которая со
     // Этот state это аналог state=store.getState()
     return (
         {
-            dialogsPage: state.dialogsPage //св-во dialogsPage попадает в пропсы в компоненту Dialogs
+            dialogsPage: state.dialogsPage, //св-во dialogsPage попадает в пропсы в компоненту Dialogs
+            isAuth: state.auth.isAuth
         }
     )
 }
