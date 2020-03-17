@@ -2,6 +2,7 @@ import React from 'react';
 import style from './ProfileInfo.module.css';
 import Preloader from "../../../Common/Preloader/Preloader";
 import ProfileStatus from './ProfileStatus'
+import defaultUserPhoto from '../../../../assets/images/defaultUserPhoto.svg'
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -14,7 +15,11 @@ const ProfileInfo = (props) => {
             <div>
                 {/*<img src = "https://wallpaperaccess.com/full/900944.jpg"/>*/}
                 <div className={style.profileInfo}>
-                    <img src={props.profile.photos.large}/>
+                    {props.profile.photos.large
+                        ? <img src={props.profile.photos.large}/>
+                        : <img src={defaultUserPhoto}/>
+                    }
+
                     <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                     {props.profile.fullName}
                     <div className={style.profileInfoBlock}>

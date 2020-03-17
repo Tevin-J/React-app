@@ -12,7 +12,7 @@ class ProfileContainer extends React.Component {
         let userId = this.props.match.params.userId; /*получаем userId с сервера при клике на юзера, для отрисовки
         своего профиля делаем проверку с помощью if*/
         if (!userId) {
-            userId = 2
+            userId = 5091
         }
         this.props.getUserProfile(userId);
         debugger
