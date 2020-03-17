@@ -2,7 +2,8 @@ import React from 'react';
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
-/*вынесли HOC по редиректу и необходимые для него данные в отдельную компоненту*/
+/*вынесли HOC по редиректу и необходимые для него данные в отдельную компоненту. isAuth будет по дефолту в реализации
+редиректа и отдельно эти данные в компоненты, которые нужно редиректить, прокидывать не надо*/
 let mapStateToPropsForRedirect = (state) => {
     return (
         {

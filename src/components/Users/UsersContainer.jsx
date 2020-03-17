@@ -8,9 +8,8 @@ import {
 } from "../../Redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
+import {compose} from "redux";
 
-/*коннектом создаем первую контейнерную компоненту, в которой отрисовываем вторую контейнерную
-компоненту, которая отрисовывает презентационную компоненту Users*/
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.getUsers(/*this.props.users,*/ this.props.currentPage, this.props.pageSize)
@@ -44,8 +43,7 @@ class UsersContainer extends React.Component {
         )
     }
 
-} /*вторая контейнерная компонента занимается аякс запросами и передает
-нужные пропсы в презентационную*/
+}
 
 let mapStateToProps = (state) => {
     return ({
@@ -58,12 +56,10 @@ let mapStateToProps = (state) => {
     })
 }
 
-export default connect (mapStateToProps, {
-    /*Вместо того чтоб создавать mapDispatchToProps и там диспатчить
-    экшнкреэйторы и санк-креэйторы, записали все экшнкреэйторы объектом сразу в коннект.
-    коннект сам задиспатчит их*/
-    setUsers, setCurrentPage, setTotalUsersCount,
-    toggleIsFetching, toggleFollowingInProgress,
-    getUsers, follow, unfollow
-})(UsersContainer) /*первая контейнерная компонента коннектит
-стор и отрисовывает вторую контейнерную компоненту*/
+export default compose(
+    connect (mapStateToProps, {
+        setUsers, setCurrentPage, setTotalUsersCount,
+        toggleIsFetching, toggleFollowingInProgress,
+        getUsers, follow, unfollow
+    })
+)(UsersContainer)
