@@ -15,7 +15,7 @@ const ProfileInfo = (props) => {
                 {/*<img src = "https://wallpaperaccess.com/full/900944.jpg"/>*/}
                 <div className={style.profileInfo}>
                     <img src={props.profile.photos.large}/>
-                    <ProfileStatus status='Hello friends!'/>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                     {props.profile.fullName}
                     <div className={style.profileInfoBlock}>
                         {props.profile.aboutMe}
