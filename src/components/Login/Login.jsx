@@ -10,10 +10,10 @@ const LoginForm = (props) => {
                     обязательный*/}
                 </div>
                 <div>
-                    <Field placeholder={'Password'} name={'password'} component={'input'}/>
+                    <Field placeholder='Password' name='password' component='input'/>
                 </div>
                 <div>
-                    <Field component={'input'} name={'rememberMe'} type={'checkbox'}/> remember me
+                    <Field component='input' name='rememberMe' type='checkbox'/> remember me
                 </div>
                 <div>
                     <button>Sign in</button>
@@ -22,7 +22,7 @@ const LoginForm = (props) => {
     )
 }
 const LoginReduxForm = reduxForm({ /*связываем LoginForm c redux-form*/
-    form: 'login' /*уникальное имя для формы, которую мы оборачиваем HOCom reduxForm*/
+    form: 'loginForm' /*уникальное имя для формы, которую мы оборачиваем HOCom reduxForm*/
 })(LoginForm)
 const Login = (props) => {
     const onSubmit = (formData) => { /*в эту ф-ю приходят все данные из формы*/

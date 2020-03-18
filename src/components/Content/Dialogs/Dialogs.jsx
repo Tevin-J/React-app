@@ -3,24 +3,35 @@ import style from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import PropTypes from 'prop-types';
+import {Field, reduxForm} from "redux-form";
 
 
-
+const AddMessageForm = (props) => {
+    return (
+        <form className={style.sendBlock} onSubmit={props.handleSubmit}>
+            <div>
+                <Field component='textarea' name='newMessageBody' placeholder='Enter your message'/>
+            </div>
+            <div>
+                <button>Send</button>
+            </div>
+        </form>
+    )
+}
+const AddMessageReduxForm = reduxForm({
+    form: 'dialogAddMessageForm'
+})(AddMessageForm)
 
 const Dialogs = (props) => {
 
     let state = props.dialogsPage;
 
-    let dialogsElements = state.dialogsData.map(dialog => <DialogItem id={dialog.id} name={dialog.name} avatar= {<img src={dialog.avatar}/>}/>);
+    let dialogsElements = state.dialogsData.map(dialog => <DialogItem id={dialog.id} name={dialog.name}
+                                                                      avatar= {<img src={dialog.avatar}/>}/>);
     let messagesElements = state.messagesData.map(message => <Message message={message.message} from={message.from}/>);
-    let newMessageText = state.newMessageText;
 
-    let onSendMessageClick = () => {
-        props.sendMessage();
-    }
-    let onNewMessageChange = (e) => {
-        let text = e.target.value;
-        props.updateNewMessageText(text);
+    const addNewMessage = (values) => {
+        props.sendMessage(values.newMessageBody)
     }
     return (
         <div>
@@ -32,14 +43,7 @@ const Dialogs = (props) => {
                     {messagesElements}
                 </div>
             </div>
-            <div className={style.sendBlock}>
-                <div>
-                    <textarea onChange={onNewMessageChange} value={newMessageText}/> {/*здесь организован FLUX-круговорот*/}
-                </div>
-                <div>
-                    <button onClick={onSendMessageClick}>Send</button>
-                </div>
-            </div>
+            <AddMessageReduxForm onSubmit={addNewMessage}/>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {sendMessageActionCreator, updateNewMessageTextActionCreator} from "../../../Redux/dialogsReducer";
+import {sendMessageActionCreator} from "../../../Redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
@@ -18,11 +18,8 @@ let mapDispatchToProps = (dispatch) => { //mapDispatchToProps - ф-я котор
     // попадут коллбеки. эти коллбеки диспатчат что-то в store dispatch приходит как store.dispatch().bind(store)
     return (
         {
-            sendMessage: () => {
-                dispatch(sendMessageActionCreator())
-            },
-            updateNewMessageText: (text) => {
-                dispatch(updateNewMessageTextActionCreator(text))
+            sendMessage: (newMessageText) => {
+                dispatch(sendMessageActionCreator(newMessageText))
             }
         }
     )
