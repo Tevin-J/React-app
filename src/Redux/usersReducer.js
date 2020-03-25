@@ -77,18 +77,16 @@ export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_C
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleFollowingInProgress = (isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_IN_PROGRESS, isFetching, userId});
 
-export const getUsers = (/*users,*/ currentPage, pageSize) => {
+export const requestUsers = (page, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
-        /*if (users.length === 0) { /!*если изначально длина массива юзеров равна нулю, то делаем get-запрос на сервер,
-             и затем вызываем коллбек который засетает юзеров, полученных с сервера*!/*/
-            usersAPI.getUsers(currentPage, pageSize).then(data => {
-                dispatch(toggleIsFetching(false));
-                dispatch(setUsers(data.items));
-                /*dispatch(setTotalUsersCount(data.totalCount))*/
-                dispatch(setTotalUsersCount(25))
-            })
-        /*}*/
+        dispatch(setCurrentPage(page))
+        usersAPI.getUsers(page, pageSize).then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+            /*dispatch(setTotalUsersCount(data.totalCount))*/
+            dispatch(setTotalUsersCount(25))
+        })
     }
 }
 export const follow = (userId) => { /*создаем санку, для объединения логики по экшенам и запросам, которые должны

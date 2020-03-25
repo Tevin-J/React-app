@@ -1,33 +1,31 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    follow,
-    getUsers,
-    setCurrentPage, setTotalUsersCount,
-    setUsers, toggleFollowingInProgress, toggleIsFetching, unfollow
+    follow, requestUsers, setCurrentPage, setTotalUsersCount, setUsers, toggleFollowingInProgress, toggleIsFetching, unfollow
 } from "../../Redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
 import {compose} from "redux";
+import {
+    getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers
+} from "../../Redux/users-selectors";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsers(/*this.props.users,*/ this.props.currentPage, this.props.pageSize)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
         /*вызываем thunk-creator из редьюсера, в котором объединена вся логика диспатчей и запросов на сервер, которые
         должны выполняться вместе*/
     }
     onPageChanged = (pageNumber) => {
-        this.props.getUsers(/*this.props.users,*/ pageNumber, this.props.pageSize)
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
     onReducePagesList = () => {
-
         let currentPage = this.props.currentPage-1;
-        this.props.getUsers(/*this.props.users,*/ currentPage, this.props.pageSize)
+        this.props.getUsers(currentPage, this.props.pageSize)
     }
     onIncreasePagesList = () => {
-
         let currentPage = this.props.currentPage+1;
-        this.props.getUsers(/*this.props.users,*/ currentPage, this.props.pageSize)
+        this.props.getUsers(currentPage, this.props.pageSize)
     }
     render() {
         return (
@@ -47,12 +45,12 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return ({
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     })
 }
 
@@ -60,6 +58,6 @@ export default compose(
     connect (mapStateToProps, {
         setUsers, setCurrentPage, setTotalUsersCount,
         toggleIsFetching, toggleFollowingInProgress,
-        getUsers, follow, unfollow
+        getUsers: requestUsers, follow, unfollow
     })
 )(UsersContainer)
