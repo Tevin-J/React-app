@@ -25,8 +25,12 @@ const AddNewPostForm = (props) => {
 const AddNewPostReduxForm = reduxForm({
     form: 'newPostBody'
 })(AddNewPostForm)
+/*для того чтоб компонента лишний раз не перерисовывалась, можно сделать проверку пропсов
+и стейта в shouldComponentUpdate. данная проверка автоматически сделана в классовой
+компоненте PureComponent, а для того чтоб использовать функциональные компоненты,
+задействуем метод React.memo, который вызовет внутреннюю функцию и вернет другую компоненту*/
+const MyPosts = React.memo(props => {
 
-const MyPosts = (props) => {
     let postData = props.postData;
 
     let postsElements = postData.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
@@ -41,7 +45,7 @@ const MyPosts = (props) => {
             {postsElements}
         </div>
     );
-}
+})
 
 export default MyPosts;
 
