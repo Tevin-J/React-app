@@ -23,7 +23,7 @@ const profileReducer = (state = initialState, action) => {
             };
             return ({
                     ...state,
-                    postData: [newPost, ...state.postData]
+                    postData: [...state.postData, newPost]
                 })
         case SET_USER_PROFILE:
             return ({

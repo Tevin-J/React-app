@@ -30,14 +30,14 @@ const AddNewPostReduxForm = reduxForm({
 компоненте PureComponent, а для того чтоб использовать функциональные компоненты,
 задействуем метод React.memo, который вызовет внутреннюю функцию и вернет другую компоненту*/
 const MyPosts = React.memo(props => {
-
-    let postData = props.postData;
-
-    let postsElements = postData.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
+    /*взяли копию пропсов, чтоб при использовании метода reverse() не менять отсюда глобальный стейт*/
+    let postData = [...props.postData];
+    let postsElements = postData.reverse().map(post => <Post message={post.message} likesCount={post.likesCount}/>)
 
     const addPost = (values) => {
         props.addPost(values.newPostBody)
     }
+
     return (
         <div className={style.myPosts}>
             <h3>My posts</h3>
