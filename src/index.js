@@ -8,13 +8,13 @@ import {Provider} from "react-redux";
 import {HashRouter} from "react-router-dom";
 
 ReactDOM.render(
-    <Provider store={store}> {/*с помощью тега provider библиотеки react-redux создаем контекст и делаем store
+    <HashRouter basename={process.env.PUBLIC_URL}> {/*необходим чтоб работал тэг route*/}
+        <Provider store={store}> {/*с помощью тега provider библиотеки react-redux создаем контекст и делаем store
             доступным для всех компонент которые мы обернули этим тегом? тем самым не нужно передавать весь store через
             пропсы вниз по дереву, а просто взять их из контекста в контейнерных компонентах*/}
-        <HashRouter basename={process.env.PUBLIC_URL}> {/*необходим чтоб работал тэг route*/}
             <App/>
-        </HashRouter>
-    </Provider>, document.getElementById('root')
+        </Provider>
+    </HashRouter>, document.getElementById('root')
 )
 
 // If you want your app to work offline and load faster, you can change
