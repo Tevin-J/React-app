@@ -1,0 +1,10 @@
+.pages {
+    cursor: pointer;
+    padding: 5px;
+}
+.selectedPage {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+    transition: 0.5s;
+}

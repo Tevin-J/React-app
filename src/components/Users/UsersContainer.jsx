@@ -12,20 +12,22 @@ import {
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
         /*вызываем thunk-creator из редьюсера, в котором объединена вся логика диспатчей и запросов на сервер, которые
         должны выполняться вместе*/
     }
     onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.getUsers(pageNumber, pageSize)
     }
     onReducePagesList = () => {
-        let currentPage = this.props.currentPage-1;
-        this.props.getUsers(currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage - 1, pageSize)
     }
     onIncreasePagesList = () => {
-        let currentPage = this.props.currentPage+1;
-        this.props.getUsers(currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage + 1, pageSize)
     }
     render() {
         return (
