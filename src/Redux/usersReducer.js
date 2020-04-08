@@ -11,7 +11,7 @@ const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'TOGGLE_IS_FOLLOWING_IN_PROGRESS'
 
 let initialState = {
     users: [],
-    pageSize: 5,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
@@ -87,8 +87,7 @@ export const requestUsers = (page, pageSize) => async (dispatch) => {
     let response = await usersAPI.getUsers(page, pageSize)
     dispatch(toggleIsFetching(false));
     dispatch(setUsers(response.data.items));
-    /*dispatch(setTotalUsersCount(data.totalCount))*/
-    dispatch(setTotalUsersCount(25))
+    dispatch(setTotalUsersCount(response.data.totalCount))
 }
 export const follow = (userId) => (dispatch) => {
     let actionCreator = followSuccess
