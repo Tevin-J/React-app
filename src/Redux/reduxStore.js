@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer from "./profileReducer";
 import dialogsReducer from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
@@ -17,7 +17,10 @@ let reducers = combineReducers({ //combineReducers объединяет reducer�
     app: appReducer,
     form: formReducer //обязательно ключ должен быть назван form, потому что библиотека redux-form будет в стейте искать именно form
 });
-let store = createStore(reducers, applyMiddleware(thunkMiddleware)); /*redux создает store с помощью команды
-createStore, добавляем прослойку thunkMiddleware для того, чтоб BLL мог выполнять запросы на сервер*/
-
+/*подключаем расширение redux devTools*/
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(
+    applyMiddleware(thunkMiddleware)
+));
+window._store_=store
 export default store;
