@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Navbar from "./components/NavBar/Navbar";
-import {Route, withRouter} from "react-router-dom";
+import {HashRouter, Route, withRouter} from "react-router-dom";
 import Feed from "./components/Content/Feed/Feed";
 import Music from "./components/Content/Music/Music";
 import Settings from "./components/Content/Settings/Settings";
@@ -12,9 +12,10 @@ import ProfileContainer from "./components/Content/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {compose} from "redux";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeApp} from "./Redux/appReducer";
 import Preloader from "./components/Common/Preloader/Preloader";
+import store from "./Redux/reduxStore";
 
 
 class App extends Component {
@@ -51,11 +52,22 @@ const mapStateToProps = (state) => {
         initialized: state.app.initialized
     }
 }
-export default compose(
+let AppContainer = compose(
     connect(mapStateToProps, {initializeApp}),
     withRouter
 )(App);
-
+const SamuraiJSApp = (props) => {
+    return (
+        <HashRouter basename={process.env.PUBLIC_URL}> {/*необходим чтоб работал тэг route*/}
+            <Provider store={store}> {/*с помощью тега provider библиотеки react-redux создаем контекст и делаем store
+            доступным для всех компонент которые мы обернули этим тегом? тем самым не нужно передавать весь store через
+            пропсы вниз по дереву, а просто взять их из контекста в контейнерных компонентах*/}
+                <AppContainer/>
+            </Provider>
+        </HashRouter>
+    )
+}
+export default SamuraiJSApp
 App.propTypes = {
     state: PropTypes.object
 }
