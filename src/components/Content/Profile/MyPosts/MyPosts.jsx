@@ -32,7 +32,7 @@ const AddNewPostReduxForm = reduxForm({
 const MyPosts = React.memo(props => {
     /*взяли копию пропсов, чтоб при использовании метода reverse() не менять отсюда глобальный стейт*/
     let postData = [...props.postData];
-    let postsElements = postData.reverse().map(post => <Post message={post.message} likesCount={post.likesCount}/>)
+    let postsElements = postData.reverse().map(post => <Post key={post.id} message={post.message} likesCount={post.likesCount}/>)
 
     const addPost = (values) => {
         props.addPost(values.newPostBody)
