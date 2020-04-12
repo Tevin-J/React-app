@@ -1,7 +1,7 @@
 import React, {Component, Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/NavBar/Navbar";
-import {HashRouter, Route, withRouter} from "react-router-dom";
+import {HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import Feed from "./components/Content/Feed/Feed";
 import Music from "./components/Content/Music/Music";
 import Settings from "./components/Content/Settings/Settings";
@@ -20,9 +20,17 @@ const ProfileContainer = React.lazy(() => import('./components/Content/Profile/P
 const DialogsContainer = React.lazy(() => import('./components/Content/Dialogs/DialogsContainer'));
 
 class App extends Component {
+    catchAllUnhandledErrors = (promiseRejectionEvent) => {
+        alert('some error occured')
+    }
     componentDidMount() {
         this.props.initializeApp()
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+
     render() {
         if (!this.props.initialized) {
             return <Preloader/>
@@ -33,16 +41,20 @@ class App extends Component {
                 <Navbar/>
                 <div className="app-wrapper-content"> {/*создали данный класс, так как он общий для всего контента, и
                 вынесли его на более высокий уровень, чтоб не прописывать в css-модуле каждой компоненты контента отдельно*/}
-                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}/> {/*работа тэга route: когда встечает заданный путь,
-                    отрисовывает заданную компоненту. вместо метода component используем render, чтоб передать в компоненты пропсы*/}
-                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/> {/*с помощью :userId
-                    показываем, что в урле profile должен быть параметр userId, а с помощью ? - что этот параметр -
-                    опциональный и его может не быть(например для отрисовки своей страницы профиля)*/}
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/feed' render={() => <Feed/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
+                    <Switch>
+                        <Route exact path={'/'} render={() => <Redirect from="/" to="/profile" />}/>
+                        <Route path='/dialogs' render={withSuspense(DialogsContainer)}/> {/*работа тэга route: когда встечает заданный путь,
+                        отрисовывает заданную компоненту. вместо метода component используем render, чтоб передать в компоненты пропсы*/}
+                        <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/> {/*с помощью :userId
+                        показываем, что в урле profile должен быть параметр userId, а с помощью ? - что этот параметр -
+                        опциональный и его может не быть(например для отрисовки своей страницы профиля)*/}
+                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/feed' render={() => <Feed/>}/>
+                        <Route path='/music' render={() => <Music/>}/>
+                        <Route path='/settings' render={() => <Settings/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
                 </div>
             </div>
         );
